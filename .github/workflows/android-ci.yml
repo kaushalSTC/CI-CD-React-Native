@@ -1,4 +1,4 @@
-name: Android CI Test
+name: Android CI Build All
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build Android APK
+    name: Build Debug, Release APK, and AAB
     runs-on: ubuntu-latest
 
     steps:
@@ -26,17 +26,54 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install Yarn (if needed)
+    - name: Install Yarn
       run: npm install -g yarn
 
     - name: Install dependencies
       run: yarn install
 
-    - name: Build Android Debug APK
+    # Decode release keystore
+    - name: Decode keystore from secret
+      run: |
+        echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/my-release-key.keystore
+
+    # Add signing config to gradle.properties
+    - name: Set up keystore properties
+      run: |
+        echo "MYAPP_UPLOAD_STORE_FILE=my-release-key.keystore" >> android/gradle.properties
+        echo "MYAPP_UPLOAD_KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> android/gradle.properties
+        echo "MYAPP_UPLOAD_STORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}" >> android/gradle.properties
+        echo "MYAPP_UPLOAD_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> android/gradle.properties
+
+    # 1. Build Debug APK
+    - name: Build Debug APK
       run: cd android && ./gradlew assembleDebug
 
-    - name: Upload APK
+    # 2. Build Release APK
+    - name: Build Release APK
+      run: cd android && ./gradlew assembleRelease
+
+    # 3. Build Release AAB
+    - name: Build Release AAB (Bundle)
+      run: cd android && ./gradlew bundleRelease
+
+    # Upload Debug APK
+    - name: Upload Debug APK
       uses: actions/upload-artifact@v4
       with:
         name: app-debug.apk
         path: android/app/build/outputs/apk/debug/app-debug.apk
+
+    # Upload Release APK
+    - name: Upload Release APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release.apk
+        path: android/app/build/outputs/apk/release/app-release.apk
+
+    # Upload Release AAB
+    - name: Upload Release AAB
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release.aab
+        path: android/app/build/outputs/bundle/release/app-release.aab
