@@ -1,0 +1,31 @@
+{
+  "buildFiles": [
+    "/Users/kaushal/Desktop/CI-CD-React-Native/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/kaushal/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/kaushal/Desktop/CI-CD-React-Native/android/app/.cxx/RelWithDebInfo/1q1r2r1k/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/kaushal/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/kaushal/Desktop/CI-CD-React-Native/android/app/.cxx/RelWithDebInfo/1q1r2r1k/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "appmodules::@6890427a1f51a3e7e1df": {
+      "artifactName": "appmodules",
+      "abi": "x86",
+      "output": "/Users/kaushal/Desktop/CI-CD-React-Native/android/app/build/intermediates/cxx/RelWithDebInfo/1q1r2r1k/obj/x86/libappmodules.so",
+      "runtimeFiles": [
+        "/Users/kaushal/.gradle/caches/8.14.1/transforms/3ba4db1ae352eb90610ca685a00c889a/transformed/fbjni-0.7.0/prefab/modules/fbjni/libs/android.x86/libfbjni.so",
+        "/Users/kaushal/.gradle/caches/8.14.1/transforms/1c9225614e4d0ab975f35005d007a9db/transformed/react-android-0.80.0-release/prefab/modules/jsi/libs/android.x86/libjsi.so",
+        "/Users/kaushal/.gradle/caches/8.14.1/transforms/1c9225614e4d0ab975f35005d007a9db/transformed/react-android-0.80.0-release/prefab/modules/reactnative/libs/android.x86/libreactnative.so"
+      ]
+    }
+  }
+}

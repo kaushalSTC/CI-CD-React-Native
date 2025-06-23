@@ -1,0 +1,5 @@
+# ninja log v5
+1	9	0	/Users/kaushal/Desktop/CI-CD-React-Native/android/app/.cxx/RelWithDebInfo/1q1r2r1k/x86_64/CMakeFiles/cmake.verify_globs	a8db153237f950f4
+1	1479	1750671361941313719	CMakeFiles/appmodules.dir/Users/kaushal/Desktop/CI-CD-React-Native/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	398a261e56895a64
+1	1673	1750671362140797241	CMakeFiles/appmodules.dir/OnLoad.cpp.o	34987f0588dbe766
+1673	1717	1750671362189335807	/Users/kaushal/Desktop/CI-CD-React-Native/android/app/build/intermediates/cxx/RelWithDebInfo/1q1r2r1k/obj/x86_64/libappmodules.so	fe5f2d4afd3838c8

@@ -1,0 +1,3 @@
+/Users/kaushal/Desktop/CI-CD-React-Native/android/app/.cxx/RelWithDebInfo/1q1r2r1k/x86_64/CMakeFiles/appmodules.dir
+/Users/kaushal/Desktop/CI-CD-React-Native/android/app/.cxx/RelWithDebInfo/1q1r2r1k/x86_64/CMakeFiles/edit_cache.dir
+/Users/kaushal/Desktop/CI-CD-React-Native/android/app/.cxx/RelWithDebInfo/1q1r2r1k/x86_64/CMakeFiles/rebuild_cache.dir

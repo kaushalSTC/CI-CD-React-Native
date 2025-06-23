@@ -1,4 +1,4 @@
-name: Android Release AAB with Fastlane
+name: Android Release AAB
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build and Release Android AAB with Fastlane
+    name: Build Release AAB
     runs-on: ubuntu-latest
 
     steps:
@@ -36,28 +36,17 @@ jobs:
       run: |
         echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/my-release-key.keystore
 
-    - name: Set up keystore properties for Gradle signing
+    - name: Set up keystore properties
       run: |
         echo "MYAPP_UPLOAD_STORE_FILE=my-release-key.keystore" >> android/gradle.properties
         echo "MYAPP_UPLOAD_KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> android/gradle.properties
         echo "MYAPP_UPLOAD_STORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}" >> android/gradle.properties
         echo "MYAPP_UPLOAD_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> android/gradle.properties
 
-    - name: Install Ruby & Bundler (for Fastlane)
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.2
-        bundler-cache: true
+    - name: Build Release AAB (Bundle)
+      run: cd android && ./gradlew bundleRelease
 
-    - name: Install Fastlane gems
-      run: bundle install
-      working-directory: android
-
-    - name: Run Fastlane build_release lane
-      run: bundle exec fastlane build_release
-      working-directory: android
-
-    - name: Upload Release AAB artifact
+    - name: Upload Release AAB
       uses: actions/upload-artifact@v4
       with:
         name: app-release.aab
